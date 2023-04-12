@@ -6,4 +6,4 @@ Url do site: https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/mic
 - [ ] Pre-processamento
   - [ ] Corrigir Enconding (possivelmente latin-1)
   - [ ] Corrigir separadores
-  - [ ] 
+
