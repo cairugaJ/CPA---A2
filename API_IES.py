@@ -1,3 +1,6 @@
+# Authors: Gabriela Dellamora, João Enrique Cairuga, Matheus Maia and Luize Iensse
+# Version: 23.04.2023
+
 import pandas as pd
 from flask import Flask
 import flask.scaffold
@@ -9,12 +12,13 @@ app = Flask(__name__)
 api = Api(app)
 
 # Lê arquivo JSON
-INSTITUICOES_ENSINO = pd.read_json("./DadosIES_Sul.json")
+INSTITUICOES_ENSINO = pd.read_json("./data/Dados_IES_Sul_indexado.json").to_dict()
+# O arquivo estava como DF, modifiquei pra json
 
 # Error handler
 def doesnt_exist(data_id):
     if data_id not in INSTITUICOES_ENSINO:
-        abort(404, message=f'Data {data_id} doesn\'t exist.')      
+        abort(404, message=f'Data id {data_id} doesn\'t exist.')      
         
 
 ##########################################################
@@ -38,10 +42,10 @@ parser.add_argument('QT_DOC_EX_MASC', type = int)
 
 # Shows a single data and lets you delete a data
 class Dataset(Resource):
+
     def get(self, data_id):
         doesnt_exist(data_id) # Handle error
-        return INSTITUICOES_ENSINO[data_id]
-    
+        return INSTITUICOES_ENSINO[data_id]   
     
     def delete(self, data_id):
         doesnt_exist(data_id) # Handle error
@@ -66,6 +70,7 @@ class Dataset(Resource):
         return (content, 201)
     
 class DataList(Resource):
+
     def get(self):
         return INSTITUICOES_ENSINO
 
@@ -90,7 +95,8 @@ class DataList(Resource):
 #######                    ROUTER                  #######
 ##########################################################
 # Actually setup the Api resource routing here
-api.add_resource(DataList, '/dataset')
+#api.add_resource(DataList, '/dataset')
+api.add_resource(DataList, '/')
 api.add_resource(Dataset, '/dataset/<int:data_id>')
 
 # Run app
