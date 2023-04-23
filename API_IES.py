@@ -95,8 +95,8 @@ class DataList(Resource):
 #######                    ROUTER                  #######
 ##########################################################
 # Actually setup the Api resource routing here
-#api.add_resource(DataList, '/dataset')
-api.add_resource(DataList, '/')
+api.add_resource(DataList, '/dataset')
+#api.add_resource(DataList, '/')
 api.add_resource(Dataset, '/dataset/<int:data_id>')
 
 # Run app
