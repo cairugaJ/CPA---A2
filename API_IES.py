@@ -50,7 +50,7 @@ class Dataset(Resource):
     def delete(self, data_id):
         doesnt_exist(data_id) # Handle error
         del INSTITUICOES_ENSINO[data_id]
-        return (f'Data {data_id} deleted.', 204)
+        return (f'Data {data_id} deleted.', 200)
 
 
     def put(self, data_id):
